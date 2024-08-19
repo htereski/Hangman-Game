@@ -12,4 +12,8 @@ class Category extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function words() {
+        return $this->hasMany(Word::class);
+    }
 }

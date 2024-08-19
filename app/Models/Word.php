@@ -13,4 +13,12 @@ class Word extends Model
         'name',
         'category_id'
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function games() {
+        return $this->hasMany(Game::class);
+    }
 }

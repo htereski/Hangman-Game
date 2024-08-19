@@ -16,4 +16,12 @@ class Game extends Model
         'word_id',
         'user_id'
     ];
+
+    public function word() {
+        return $this->belongsTo(Word::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

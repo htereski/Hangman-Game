@@ -12,4 +12,8 @@ class Resource extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function role() {
+        return $this->belongsToMany([Role::class, 'permissions']);
+    }
 }
