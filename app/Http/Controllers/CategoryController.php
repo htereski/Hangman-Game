@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category = $this->repository->findById($id);
 
         if (isset($category)) {
-            return view('category.edit', compact(['category']));
+            return view('category.show', compact(['category']));
         }
 
         return view('message')
