@@ -15,19 +15,24 @@ class CategorySeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Objetos'
+                'name' => 'Objetos',
+                'url' => 'undefined'
             ],
             [
-                'name' => 'Animais'
+                'name' => 'Animais',
+                'url' => 'undefined'
             ],
             [
-                'name' => 'Personagens de Contos de Fadas'
+                'name' => 'Personagens de Contos de Fadas',
+                'url' => 'undefined'
             ],
             [
-                'name' => 'Termos Científicos'
+                'name' => 'Termos Científicos',
+                'url' => 'undefined'
             ],
             [
-                'name' => 'Mitologia Grega'
+                'name' => 'Mitologia Grega',
+                'url' => 'undefined'
             ],
         ];
 
