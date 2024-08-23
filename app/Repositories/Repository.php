@@ -13,10 +13,7 @@ class Repository {
         $this->model = $model;
     }
 
-    public function selectAll(object $paginate = null) {
-        if($paginate->use) 
-            return $this->model->paginate($paginate->rows);
-
+    public function selectAll() {
         return $this->model->all();
     }
 

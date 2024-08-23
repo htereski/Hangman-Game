@@ -16,23 +16,23 @@ class CategorySeeder extends Seeder
         $data = [
             [
                 'name' => 'Objetos',
-                'url' => 'undefined'
+                'url' => 'storage/object.jpg'
             ],
             [
                 'name' => 'Animais',
-                'url' => 'undefined'
+                'url' => 'storage/animals.jpg'
             ],
             [
                 'name' => 'Personagens de Contos de Fadas',
-                'url' => 'undefined'
+                'url' => 'storage/characters.jpg'
             ],
             [
                 'name' => 'Termos Científicos',
-                'url' => 'undefined'
+                'url' => 'storage/scientific.jpg'
             ],
             [
                 'name' => 'Mitologia Grega',
-                'url' => 'undefined'
+                'url' => 'storage/mythology.jpg'
             ],
         ];
 

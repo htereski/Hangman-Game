@@ -21,14 +21,14 @@ class CategoryController extends Controller
 
         $categories = $this->repository->selectAll();
 
-        return view('category.index', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     public function create()
     {
         $this->authorize('create', Category::class);
 
-        return view('category.create');
+        return view('categories.create');
     }
 
     public function store(Request $request)
@@ -41,14 +41,14 @@ class CategoryController extends Controller
         ]);
 
         if ($this->repository->saveWithImg($request)) {
-            return redirect('category.index');
+            return redirect('categories.index');
         }
 
         return view('message')
             ->with('type', "danger")
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+            ->with('link', "categories.index");
     }
 
     public function show(string $id)
@@ -58,14 +58,14 @@ class CategoryController extends Controller
         $category = $this->repository->findById($id);
 
         if (isset($category)) {
-            return view('category.show', compact(['category']));
+            return view('categories.show', compact(['category']));
         }
 
         return view('message')
             ->with('type', "danger")
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+            ->with('link', "categories.index");
     }
 
     public function edit(string $id)
@@ -75,14 +75,14 @@ class CategoryController extends Controller
         $category = $this->repository->findById($id);
 
         if (isset($category)) {
-            return view('category.edit', compact(['category']));
+            return view('categories.edit', compact(['category']));
         }
 
         return view('message')
             ->with('type', "danger")
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+            ->with('link', "categories.index");
     }
 
     public function update(Request $request, string $id)
@@ -95,14 +95,14 @@ class CategoryController extends Controller
         ]);
 
         if ($this->repository->updateWithImg($request, $id)) {
-            return redirect('category.index');
+            return redirect('categories.index');
         }
 
         return view('message')
             ->with('type', "danger")
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+            ->with('link', "categories.index");
     }
 
     public function destroy(string $id)
@@ -110,13 +110,13 @@ class CategoryController extends Controller
         $this->authorize('destroy', Category::class);
 
         if ($this->repository->delete($id)) {
-            return redirect('category.index');
+            return redirect('categories.index');
         }
 
         return view('message')
             ->with('type', "danger")
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+            ->with('link', "categories.index");
     }
 }

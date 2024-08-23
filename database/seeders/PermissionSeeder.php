@@ -27,7 +27,7 @@ class PermissionSeeder extends Seeder
                         'permission' => 1
                     ];
                 } else if ($role->name == 'PLAYER') {
-                    if ($resource->name == 'category.index' || $resource->name == 'word.index') {
+                    if ($resource->name == 'category.index') {
                         $data[] = [
                             'role_id' => $role->id,
                             'resource_id' => $resource->id,

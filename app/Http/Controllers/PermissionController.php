@@ -12,7 +12,7 @@ class PermissionController extends Controller
         $sess = array();
         $perm = Permission::with(['resource'])->where('role_id', $role)->get();
         foreach($perm as $item){
-            $sess[$item->resource->nome] = (boolean) $item->permission;
+            $sess[$item->resource->name] = (boolean) $item->permission;
         }
         session(['user_permissions' => $sess]);
     }

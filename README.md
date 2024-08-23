@@ -1,17 +1,5 @@
 # Rodando localmente
 
-## Clone o projeto
-
-```bash
-  git clone https://github.com/htereski/Hangman-Game/tree/main
-```
-
-## Entre no diretório do projeto
-
-```bash
-  cd Hangman-Game
-```
-
 ## Instale as dependências
 
 ```bash
@@ -27,6 +15,21 @@
   php artisan key:generate
 ```
 
+## Migrations e Seeders
+
+```bash
+  php artisan migrate:fresh
+```
+```bash
+  php artisan db:seed
+```
+
+## Gere um link simbólico
+
+```bash
+  php artisan storage:link
+```
+
 ## Inicie o servidor
 
 ```bash
@@ -35,4 +38,3 @@
 ```bash
   php artisan serve
 ```
-
