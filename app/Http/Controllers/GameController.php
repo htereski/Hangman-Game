@@ -114,7 +114,7 @@ class GameController extends Controller
 
     public function destroy(string $id)
     {
-        $this->authorize('destory', Game::class);
+        $this->authorize('destroy', Game::class);
 
         if ($this->repository->delete($id)) {
             return redirect('game.index');
