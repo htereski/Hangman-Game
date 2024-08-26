@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resources(['categories' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
+Route::resources(['game' => GameController::class]);
 
 require __DIR__.'/auth.php';
