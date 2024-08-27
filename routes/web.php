@@ -23,5 +23,6 @@ Route::middleware('auth')->group(function () {
 Route::resources(['categories' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
 Route::resources(['game' => GameController::class]);
+Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('game.letter');
 
 require __DIR__.'/auth.php';

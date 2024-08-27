@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('typed_word', 7)->nullable();
+            $table->string('typed_word')->nullable();
             $table->integer('attempts')->default(7);
             $table->string('status');
             $table->unsignedBigInteger('word_id');

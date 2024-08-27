@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GameHelper;
 use App\Models\Game;
 use App\Repositories\GameRepository;
+use App\Services\GameServiceImpl;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class GameController extends Controller
 {
     protected $repository;
+    protected $service;
 
     function __construct()
     {
         $this->repository = new GameRepository();
+        $this->service = new GameServiceImpl();
     }
 
     public function index()
@@ -36,16 +40,8 @@ class GameController extends Controller
     {
         $this->authorize('create', Game::class);
 
-        $request->validate([
-            'typed_word' => ['required', 'string', 'max:255'],
-            'attempts' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'string', 'max:255'],
-            'word_id' => ['required', Rule::exists('words', 'id')],
-            'user_id' => ['required', Rule::exists('users', 'id')]
-        ]);
-
-        if ($this->repository->save($request)) {
-            return redirect('game.index');
+        if ($this->repository->newGame()) {
+            return redirect()->route('game.index');
         }
 
         return view('message')
@@ -125,5 +121,29 @@ class GameController extends Controller
             ->with('titulo', "OPERAÇÃO INVÁLIDA")
             ->with('message', "Não foi possível efetuar o procedimento!")
             ->with('link', "game.index");
+    }
+
+    public function insertLetter(Request $request, $id)
+    {
+        // $this->authorize('start', Game::class);
+
+        $request->validate([
+            'letter' => ['required', 'string', 'max:1']
+        ]);
+
+        $letter = strtolower($request->input('letter'));
+        $game = $this->repository->findById($id);
+
+        $result = $this->service->insertLetter($game, $letter);
+
+        if ($result['status'] === 'success') {
+            return redirect()->route('game.show', $result['game']->id);
+        }
+
+        return view('message')
+            ->with('type', "danger")
+            ->with('titulo', "OPERAÇÃO INVÁLIDA")
+            ->with('message', $result['message'])
+            ->with('link', "game.show");
     }
 }
