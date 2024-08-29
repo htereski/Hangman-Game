@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\GameHelper;
 use App\Models\Game;
 use App\Repositories\GameRepository;
 use App\Services\GameServiceImpl;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class GameController extends Controller
@@ -57,6 +57,13 @@ class GameController extends Controller
 
         $game = $this->repository->findById($id);
 
+        if (Auth::user()->id !== $game->user_id) {
+            return view('message');
+            // ->with('type', "danger")
+            // ->with('titulo', "OPERAÇÃO INVÁLIDA")
+            // ->with('message', "Você não possui permissão para realizar esta ação!")
+            // ->with('link', "game.show");
+        }
         if (isset($game)) {
             return view('game.show', compact('game'));
         }
@@ -125,8 +132,6 @@ class GameController extends Controller
 
     public function insertLetter(Request $request, $id)
     {
-        // $this->authorize('start', Game::class);
-
         $request->validate([
             'letter' => ['required', 'string', 'max:1']
         ]);
@@ -134,11 +139,19 @@ class GameController extends Controller
         $letter = strtolower($request->input('letter'));
         $game = $this->repository->findById($id);
 
+        if (Auth::user()->id !== $game->user_id) {
+            return view('message')
+                ->with('type', "danger")
+                ->with('titulo', "OPERAÇÃO INVÁLIDA")
+                ->with('message', "Você não possui permissão para realizar esta ação!")
+                ->with('link', "game.show");
+        }
+
         $result = $this->service->insertLetter($game, $letter);
 
-        if ($result['status'] === 'success') {
-            return redirect()->route('game.show', $result['game']->id);
-        }
+        // if ($result['status'] === 'success') {
+        // }
+        return redirect()->route('game.show', $result['game']->id);
 
         return view('message')
             ->with('type', "danger")

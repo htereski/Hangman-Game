@@ -9,22 +9,21 @@ class GameServiceImpl implements GameService
 {
     public function insertLetter(Game $game, string $letter)
     {
-        $word = $game->word->name;
+        $word = GameHelper::removeAccents($game->word->name);
+        $normalizedLetter = GameHelper::removeAccents($letter);
 
         if ($game->status !== 'JOGANDO') {
-            return ['status' => 'error', 'message' => 'O jogo já foi finalizado.'];
+            return ['status' => 'error', 'message' => 'O jogo já foi finalizado.', 'game' => $game];
         }
 
-        if (strpos($game->typed_word, $letter) !== false) {
-            return ['status' => 'error', 'message' => 'Você já tentou essa letra.'];
+        if (strpos($game->typed_word, $normalizedLetter) !== false) {
+            return ['status' => 'error', 'message' => 'Você já tentou essa letra.', 'game' => $game];
         }
+        $game->typed_word .= $normalizedLetter;
 
-        $game->typed_word .= $letter;
-
-        if (strpos($word, $letter) === false) {
+        if (strpos($word, $normalizedLetter) === false) {
             $game->attempts += 1;
         }
-
         $game = GameHelper::verifyGameStatus($game);
         $game->save();
 
