@@ -77,7 +77,7 @@
     </div>
 
     <div class="text-6xl mb-6">
-      <p class="text-primary">Categorias</p>
+      <p class="text-primary">Palavras</p>
     </div>
 
   </div>
