@@ -88,7 +88,7 @@
     <ul class="menu bg-base-200 rounded-box w-56 text-4xl gap-10 flex flex-row justify-center items-center text-primary">
       <li><a>Jogar</a></li>
       <li><a>Estatísticas</a></li>
-      <li><a>Categorias</a></li>
+      <li><a href="/category">Categorias</a></li>
       <li><a>Palavras</a></li>
     </ul>
   </div>
