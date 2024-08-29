@@ -20,9 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
   return view('layouts.home');
 })->name('home');
+
+Route::get('/category', function () {
+  return view('layouts.category');
+})->name('category');
 
 Route::resources(['categories' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
