@@ -9,8 +9,11 @@
   composer install
 ```
 
-## Gere uma "APP_KEY" para o .env
+## .env
 
+```bash
+  cp .env.example .env
+```
 ```bash
   php artisan key:generate
 ```
