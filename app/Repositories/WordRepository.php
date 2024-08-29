@@ -13,4 +13,9 @@ class WordRepository extends Repository {
     }   
 
     public function getRows() { return $this->rows; }
+
+    public function getRandomWord() {
+        $words = $this->selectAll();
+        return $words->random();
+    }
 }
