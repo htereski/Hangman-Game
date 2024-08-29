@@ -43,7 +43,22 @@ class ResourceSeeder extends Seeder
             ],
             [
                 'name' => 'word.destroy'
-            ]
+            ],
+            [
+                'name' => 'game.index'
+            ],
+            [
+                'name' => 'game.show'
+            ],
+            [
+                'name' => 'game.create'
+            ],
+            [
+                'name' => 'game.edit'
+            ],
+            [
+                'name' => 'game.destroy'
+            ],
         ];
 
         DB::table('resources')->insert($data);

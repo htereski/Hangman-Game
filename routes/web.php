@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,5 +24,9 @@ Route::get('/home', function () {
   return view('layouts.home');
 })->name('home');
 
+Route::resources(['categories' => CategoryController::class]);
+Route::resources(['word' => WordController::class]);
+Route::resources(['game' => GameController::class]);
+Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('game.letter');
 
 require __DIR__.'/auth.php';
