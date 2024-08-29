@@ -120,4 +120,13 @@ class WordController extends Controller
             ->with('message', "Não foi possível efetuar o procedimento!")
             ->with('link', "word.index");
     }
+
+  public function indexByCategory($categoryId)
+  {
+    $this->authorize('index', Word::class);
+
+    $words = $this->repository->findWordsByCategoryId($categoryId);
+
+    return view('word.index', compact('words'));
+  }
 }

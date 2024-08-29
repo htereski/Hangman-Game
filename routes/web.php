@@ -28,6 +28,8 @@ Route::get('/category', function () {
   return view('layouts.category');
 })->name('category');
 
+Route::get('/word/category/{categoryId}', [WordController::class, 'indexByCategory'])->name('word.indexByCategory');
+
 Route::resources(['category' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
 Route::resources(['game' => GameController::class]);
