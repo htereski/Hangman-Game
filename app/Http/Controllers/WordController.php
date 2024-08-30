@@ -25,7 +25,7 @@ class WordController extends Controller
 
       $words = $this->repository->selectAll();
 
-      return view('word.index', compact('words', 'category'));
+      return view('word.index', compact('words'));
     }
 
     public function create()
@@ -44,8 +44,12 @@ class WordController extends Controller
             'category_id' => ['required', Rule::exists('categories', 'id')]
         ]);
 
-        if ($this->repository->save($request)) {
-            return redirect()->route('word.index');
+        $word = new Word();
+        $word->name = $request->name;
+        $word->category_id = $request->category_id;
+
+        if ($this->repository->save($word)) {
+            return redirect()->route('word.indexByCategory', $word->category_id);
         }
 
         return view('message')
