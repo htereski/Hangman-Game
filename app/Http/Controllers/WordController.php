@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Word;
 use App\Repositories\WordRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,15 +15,17 @@ class WordController extends Controller
     function __construct()
     {
         $this->repository = new WordRepository();
+
+        $this->categoryRepository = new CategoryRepository();
     }
 
     public function index()
     {
-        $this->authorize('index', Word::class);
+      $this->authorize('index', Word::class);
 
-        $words = $this->repository->selectAll();
+      $words = $this->repository->selectAll();
 
-        return view('word.index', compact('words'));
+      return view('word.index', compact('words', 'category'));
     }
 
     public function create()
@@ -126,7 +129,8 @@ class WordController extends Controller
     $this->authorize('index', Word::class);
 
     $words = $this->repository->findWordsByCategoryId($categoryId);
+    $category = $this->categoryRepository->findById($categoryId);
 
-    return view('word.index', compact('words'));
+    return view('word.index', compact('words', 'category'));
   }
 }
