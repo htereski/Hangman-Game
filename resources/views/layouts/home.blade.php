@@ -91,7 +91,6 @@
       <li><a>Jogar</a></li>
       <li><a>Estatísticas</a></li>
       <li><a href="/category">Categorias</a></li>
-      <li><a href="/word">Palavras</a></li>
     </ul>
   </div>
 </x-guest-layout>
