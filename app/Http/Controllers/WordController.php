@@ -95,8 +95,14 @@ class WordController extends Controller
             'category_id' => ['required', Rule::exists('categories', 'id')]
         ]);
 
-        if ($this->repository->save($request)) {
-            return redirect('word.index');
+        $word = $this->repository->findById($id);
+
+        if (isset($word)) {
+            $word->name = $request->name;
+            $word->category_id = $request->category_id;
+            if ($this->repository->save($word)) {
+                return redirect('word.index');
+            }
         }
 
         return view('message')
