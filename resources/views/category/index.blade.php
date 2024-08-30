@@ -25,15 +25,17 @@
             <div class="mb-4">
               <input
                 type="text"
+                name="name"
                 placeholder="Nome"
                 class="input input-bordered input-secondary w-full max-w-xs" />
             </div>
 
             <div class="mb-4">
               <input
-                type="text"
-                placeholder="URL"
-                class="input input-bordered input-secondary w-full max-w-xs" />
+                type="file"
+                name="img"
+                accept="file"
+                class="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
             </div>
 
             <div class="flex gap-4">
@@ -42,7 +44,7 @@
             </div>
           </form>
         </div>
-    </dialog>
+      </dialog>
     </div>
 
     <div class="text-6xl mb-6">
