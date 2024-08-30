@@ -104,8 +104,18 @@ class GameController extends Controller
             'user_id' => ['required', Rule::exists('users', 'id')]
         ]);
 
-        if ($this->repository->save($request)) {
-            return redirect('game.index');
+        $game = $this->repository->findById($id);
+
+        if (isset($game)) {
+            $game->typed_word = $request->typed_word;
+            $game->attempts = $request->attempts;
+            $game->status = $request->status;
+            $game->word_id = $request->word_id;
+            $game->user_id = $request->user_id;
+
+            if ($this->repository->save($game)) {
+                return redirect('word.index');
+            }
         }
 
         return view('message')
