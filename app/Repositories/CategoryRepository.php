@@ -22,12 +22,12 @@ class CategoryRepository extends Repository {
         $category->url = 'undefined';
         $category->id = $this->saveAndReturnId($category);
 
-        $ext = $request->file('img')->getClientOriginalExtension();
-        $nome_arq = $category->id . "_" . time() . "." . $ext;
-        $request->file('img')->storeAs("public/", $nome_arq);
-
-        $category->url = $nome_arq;
-        
+        if ($request->hasFile('img')) {
+            $ext = $request->file('img')->getClientOriginalExtension();
+            $nome_arq = $category->id . "_" . time() . "." . $ext;
+            $request->file('img')->storeAs("public/", $nome_arq);
+            $category->url = "/storage/" . $nome_arq;
+        }
         return $this->save($category);
     }
 

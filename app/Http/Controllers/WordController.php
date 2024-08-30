@@ -42,7 +42,7 @@ class WordController extends Controller
         ]);
 
         if ($this->repository->save($request)) {
-            return redirect('word.index');
+            return redirect()->route('word.index');
         }
 
         return view('message')
@@ -96,7 +96,7 @@ class WordController extends Controller
         ]);
 
         if ($this->repository->save($request)) {
-            return redirect('word.index');
+            return redirect()->route('word.index');
         }
 
         return view('message')
@@ -111,7 +111,7 @@ class WordController extends Controller
         $this->authorize('destroy', Word::class);
 
         if ($this->repository->delete($id)) {
-            return redirect('word.index');
+            return redirect()->route('word.index');
         }
 
         return view('message')

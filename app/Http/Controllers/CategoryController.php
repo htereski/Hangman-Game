@@ -41,7 +41,7 @@ class CategoryController extends Controller
         ]);
 
         if ($this->repository->saveWithImg($request)) {
-            return redirect('category.index');
+            return redirect()->route('category.index');
         }
 
         return view('message')
@@ -95,7 +95,7 @@ class CategoryController extends Controller
         ]);
 
         if ($this->repository->updateWithImg($request, $id)) {
-            return redirect('category.index');
+            return redirect()->route('category.index');
         }
 
         return view('message')
@@ -110,7 +110,7 @@ class CategoryController extends Controller
         $this->authorize('destroy', Category::class);
 
         if ($this->repository->delete($id)) {
-            return redirect('category.index');
+            return redirect()->route('category.index');
         }
 
         return view('message')
