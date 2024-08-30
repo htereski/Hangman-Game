@@ -51,7 +51,7 @@
       <p class="text-primary">Categorias</p>
     </div>
 
-    <div class="grid grid-rows-2 grid-flow-col gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       @foreach ($categories as $category)
       <a href="/word/category/{{ $category->id }}">
         <div class="card image-full w-96 shadow-xl mb-4 transition-opacity duration-300 hover:opacity-100 opacity-50 cursor-pointer">
@@ -62,7 +62,8 @@
             <h2 class="card-title select-none">{{ $category->name }}</h2>
           </div>
         </div>
+      </a>
       @endforeach
-    </div>
+  </div>
   </div>
 </x-app-layout>
