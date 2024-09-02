@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
   <div class="flex flex-col items-center">
     <div class="top-menu flex justify-between items-center px-4 w-[20%]">
       <div class="left">
@@ -74,14 +74,14 @@
                     class="input input-bordered input-secondary w-full max-w-xs" />
                 </div>
 
-                {{-- <div class="mb-4 hidden">
+                <div class="mb-4 hidden">
                   <input
                     type="text"
                     value="{{ $category->id }}"
                     name="category_id"
                     placeholder="Nome"
                     class="input input-bordered input-secondary w-full max-w-xs" />
-                </div> --}}
+                </div>
 
                 <div class="flex gap-4">
                   <button type="button" onclick="my_modal_1.close()" class="btn btn-secondary">Cancelar</button>
@@ -103,4 +103,4 @@
     </ul>
 
   </div>
-</x-guest-layout>
+</x-app-layout>
