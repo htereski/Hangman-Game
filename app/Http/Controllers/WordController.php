@@ -128,6 +128,21 @@ class WordController extends Controller
             ->with('link', "word.index");
     }
 
+    public function destroyAndReturn(string $id, string $categoryId)
+    {
+        $this->authorize('destroy', Word::class);
+
+        if ($this->repository->delete($id)) {
+            return redirect()->route('word.indexByCategory', $categoryId);
+        }
+
+        return view('message')
+            ->with('type', "danger")
+            ->with('titulo', "OPERAÇÃO INVÁLIDA")
+            ->with('message', "Não foi possível efetuar o procedimento!")
+            ->with('link', "word.index");
+    }
+
   public function indexByCategory($categoryId)
   {
     $this->authorize('index', Word::class);
