@@ -23,4 +23,9 @@ class WordRepository extends Repository {
     {
       return Word::where('category_id', $categoryId)->get();
     }
+
+    public function deleteAllWordsByCategoryId($categoryId)
+    {
+      return Word::where('category_id', $categoryId)->delete();
+    }
 }

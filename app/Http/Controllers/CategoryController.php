@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
+use App\Repositories\WordRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,6 +14,8 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->repository = new CategoryRepository();
+
+        $this->wordRepository = new WordRepository();
     }
 
     public function index()
@@ -107,6 +110,9 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
+
+        $this->wordRepository->deleteAllWordsByCategoryId($id);
+
         $this->authorize('destroy', Category::class);
 
         if ($this->repository->delete($id)) {
