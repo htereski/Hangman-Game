@@ -109,7 +109,7 @@ class WordController extends Controller
             $word->name = $request->name;
             $word->category_id = $request->category_id;
             if ($this->repository->save($word)) {
-                return redirect('word.index');
+              return redirect()->route('word.indexByCategory', $word->category_id);
             }
         }
 

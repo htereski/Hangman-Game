@@ -90,15 +90,17 @@
 </x-app-layout>
 
 <script>
-  function openModal(action, wordName, categoryId) {
+  function openModal(action, wordName, categoryId, wordId) {
     const form = document.getElementById('word-form');
     const modal = document.getElementById('modal');
     const methodContainer = document.getElementById('http-method-container');
 
     methodContainer.innerHTML = '';
 
+    console.log(action);
+
     if(action === 'new') {
-      form.action = `{{ route('word.store') }}`;
+      form.action = `{{ url('word') }}`;
       document.getElementById('word-name').value = '';
       document.getElementById('category-id').value = categoryId;
       methodContainer.innerHTML = '@method("POST")';
