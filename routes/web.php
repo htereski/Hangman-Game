@@ -34,5 +34,7 @@ Route::resources(['category' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
 Route::resources(['game' => GameController::class]);
 Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('game.letter');
+Route::get('/report', [GameController::class, 'report'])->name('report');
+Route::get('/graph', [GameController::class, 'graph'])->name('graph');
 
 require __DIR__.'/auth.php';
