@@ -133,7 +133,7 @@ class GameController extends Controller
         $this->authorize('destroy', Game::class);
 
         if ($this->repository->delete($id)) {
-            return redirect('game.index');
+            return redirect()->route('game.index');
         }
 
         return view('message')

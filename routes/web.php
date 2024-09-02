@@ -20,11 +20,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
   return view('layouts.home');
 })->name('home');
 
-Route::resources(['categories' => CategoryController::class]);
+Route::get('/category', function () {
+  return view('layouts.category');
+})->name('category');
+
+Route::get('/word/category/{categoryId}', [WordController::class, 'indexByCategory'])->name('word.indexByCategory');
+
+Route::resources(['category' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
 Route::resources(['game' => GameController::class]);
 Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('game.letter');
