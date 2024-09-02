@@ -90,23 +90,35 @@ class CategoryController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $this->authorize('edit', Category::class);
+      $this->authorize('edit', Category::class);
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'img' => ['required', 'file']
-        ]);
+      $rules = [
+        'name' => ['required', 'string', 'max:255'],
+      ];
 
+      if ($request->hasFile('img')) {
+        $rules['img'] = ['required', 'file'];
+      }
+
+      $request->validate($rules);
+
+      if ($request->hasFile('img')) {
         if ($this->repository->updateWithImg($request, $id)) {
-            return redirect()->route('category.index');
+          return redirect()->route('category.index');
         }
+      } else {
+        if ($this->repository->updateWithoutImg($request, $id)) {
+          return redirect()->route('category.index');
+        }
+      }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+      return view('message')
+        ->with('type', "danger")
+        ->with('titulo', "OPERAÇÃO INVÁLIDA")
+        ->with('message', "Não foi possível efetuar o procedimento!")
+        ->with('link', "category.index");
     }
+
 
     public function destroy(string $id)
     {

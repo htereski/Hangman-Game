@@ -55,4 +55,17 @@ class CategoryRepository extends Repository
         }
         return false;
     }
+
+    public function updateWithoutImg(Request $request, string $id)
+    {
+      $category = Category::find($id);
+
+      if (!$category) {
+        return false;
+      }
+
+      $category->name = $request->input('name');
+
+      return $category->save();
+    }
 }
