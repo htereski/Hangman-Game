@@ -114,34 +114,31 @@ class WordController extends Controller
     }
 
     public function destroy(string $id)
-    {
-        $this->authorize('destroy', Word::class);
+  {
+      $this->authorize('destroy', Word::class);
 
-        if ($this->repository->delete($id)) {
-            return redirect()->route('word.index');
-        }
+      $word = $this->repository->findById($id);
 
+      if(!$word) {
         return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
-    }
+          ->with('type', "danger")
+          ->with('titulo', "OPERAÇÃO INVÁLIDA")
+          ->with('message', "Palavra não encontrada!")
+          ->with('link', "word.index");
+      }
 
-    public function destroyAndReturn(string $id, string $categoryId)
-    {
-        $this->authorize('destroy', Word::class);
+      $category = $this->categoryRepository->findById($word->category_id);
 
-        if ($this->repository->delete($id)) {
-            return redirect()->route('word.indexByCategory', $categoryId);
-        }
+      if($this->repository->delete($id)) {
+        return redirect()->route('word.indexByCategory', $category->id);
+      }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
-    }
+      return view('message')
+        ->with('type', "danger")
+        ->with('titulo', "OPERAÇÃO INVÁLIDA")
+        ->with('message', "Não foi possível efetuar o procedimento!")
+        ->with('link', "word.index");
+  }
 
   public function indexByCategory($categoryId)
   {

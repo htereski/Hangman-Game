@@ -30,8 +30,6 @@ Route::get('/category', function () {
 
 Route::get('/word/category/{categoryId}', [WordController::class, 'indexByCategory'])->name('word.indexByCategory');
 
-Route::delete('/word/{id}/{categoryId}', [WordController::class, 'destroyAndReturn'])->name('word.destroyAndReturn');
-
 Route::resources(['category' => CategoryController::class]);
 Route::resources(['word' => WordController::class]);
 Route::resources(['game' => GameController::class]);

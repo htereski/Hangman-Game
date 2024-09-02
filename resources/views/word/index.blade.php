@@ -49,18 +49,49 @@
     </div>
 
     <div class="text-6xl mb-6">
-      <p class="text-primary">Palavras - {{$category->name}}</p>
+      <p class="text-primary">{{$category->name}}</p>
     </div>
 
     <ul>
       @foreach($words as $word)
         <div class="words flex justify-end items-center gap-10">
           <li class="text-primary text-4xl">{{ $word->name }}</li>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-primary cursor-pointer">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-          </svg>
+          <a href="">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-primary cursor-pointer">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" onclick="my_modal_2.showModal()" />
+            </svg>
+          </a>
+          <dialog id="my_modal_2" class="modal">
+            <div class="modal-box">
+              <h3 class="text-lg font-bold text-primary">Criar Palavra(s)</h3>
+              <form action="{{ route('word.update', $word->id) }}" method="PUT">
+                @csrf
+                <div class="mb-4">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Nome"
+                    class="input input-bordered input-secondary w-full max-w-xs" />
+                </div>
 
-          <form action="{{ route('word.destroyAndReturn', [$word->id, $category->id]) }}" method="POST" id="delete-form-{{ $word->id }}">
+                {{-- <div class="mb-4 hidden">
+                  <input
+                    type="text"
+                    value="{{ $category->id }}"
+                    name="category_id"
+                    placeholder="Nome"
+                    class="input input-bordered input-secondary w-full max-w-xs" />
+                </div> --}}
+
+                <div class="flex gap-4">
+                  <button type="button" onclick="my_modal_1.close()" class="btn btn-secondary">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Cadastrar Palavra(s)</button>
+                </div>
+              </form>
+            </div>
+          </dialog>
+
+          <form action="{{ route('word.destroy', [$word->id]) }}" method="POST" id="delete-form-{{ $word->id }}">
             @csrf
             @method('DELETE')
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-primary cursor-pointer" onclick="document.getElementById('delete-form-{{ $word->id }}').submit();">
