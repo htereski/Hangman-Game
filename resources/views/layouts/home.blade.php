@@ -27,7 +27,7 @@
                     type="radio"
                     name="theme-dropdown"
                     class="theme-controller btn btn-sm btn-block btn-ghost text-center"
-                    aria-label="Dracula"
+                    aria-label="Escuro"
                     value="default" />
                 </li>
                 <li>
@@ -35,32 +35,8 @@
                     type="radio"
                     name="theme-dropdown"
                     class="theme-controller btn btn-sm btn-block btn-ghost text-center"
-                    aria-label="Cyberpunk"
-                    value="cyberpunk" />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost text-center"
-                    aria-label="Aqua"
-                    value="aqua" />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost text-center"
-                    aria-label="Synthwave"
-                    value="synthwave" />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost text-center"
-                    aria-label="Retro"
-                    value="retro" />
+                    aria-label="Claro"
+                    value="emerald" />
                 </li>
               </ul>
             </div>
