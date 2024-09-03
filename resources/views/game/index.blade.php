@@ -41,7 +41,10 @@
     </div>
 
     <div>
-      <a href="{{ route('game.create') }}" class="btn btn-primary">Novo Jogo</a>
+        <form action="{{ route('game.store') }}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-primary">Iniciar Novo Jogo</button>
+        </form>
     </div>
   </div>
 </x-app-layout>

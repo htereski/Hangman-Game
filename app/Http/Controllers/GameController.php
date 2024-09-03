@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Game;
+use App\Models\Word;
 use App\Repositories\GameRepository;
 use App\Services\GameServiceImpl;
 use Dompdf\Dompdf;
@@ -33,13 +35,6 @@ class GameController extends Controller
         return view('game.index', compact('games'));
     }
 
-    public function create()
-    {
-        $this->authorize('create', Game::class);
-
-        return view('game.create');
-    }
-
     public function store(Request $request)
     {
         $this->authorize('create', Game::class);
@@ -58,12 +53,14 @@ class GameController extends Controller
         $this->authorize('show', Game::class);
 
         $game = $this->repository->findById($id);
+        $word = Word::find($game->word_id);
+        $category = Category::find($word->category_id);
 
         if (Auth::user()->id !== $game->user_id) {
             return view('message');
         }
         if (isset($game)) {
-            return view('game.show', compact('game'));
+            return view('game.show', compact('game', 'category'));
         }
 
         return view('message');
