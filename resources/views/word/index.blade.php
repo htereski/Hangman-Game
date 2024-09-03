@@ -81,7 +81,7 @@
 
           <div class="flex gap-4">
             <button type="button" onclick="document.getElementById('modal').close()" class="btn btn-secondary">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Salvar Palavra</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
           </div>
         </form>
       </div>
@@ -94,6 +94,7 @@
     const form = document.getElementById('word-form');
     const modal = document.getElementById('modal');
     const methodContainer = document.getElementById('http-method-container');
+    const modalTitle = modal.querySelector('h3');
 
     methodContainer.innerHTML = '';
 
@@ -104,12 +105,14 @@
       document.getElementById('word-name').value = '';
       document.getElementById('category-id').value = categoryId;
       methodContainer.innerHTML = '@method("POST")';
+      modalTitle.textContent = 'Criar';
     }
     else {
       form.action = `{{ url('word') }}/${action}`;
       document.getElementById('word-name').value = wordName;
       document.getElementById('category-id').value = categoryId;
       methodContainer.innerHTML = '@method("PUT")';
+      modalTitle.textContent = 'Editar';
     }
 
     modal.showModal();
