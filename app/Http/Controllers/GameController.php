@@ -173,6 +173,11 @@ class GameController extends Controller
             ->with('link', "game.show");
     }
 
+    public function statistics()
+    {
+        return view('game.statistic');
+    }
+
     public function report()
     {
         $user_id = Auth::user()->id;
@@ -221,7 +226,7 @@ class GameController extends Controller
 
         if (!$exists) {
             $message = 'Você não possui jogos ainda.';
-            return view('game.graph', compact('data', 'name','message'));
+            return view('game.graph', compact('data', 'name', 'message'));
         }
 
         return view('game.graph', compact('data', 'name'));
