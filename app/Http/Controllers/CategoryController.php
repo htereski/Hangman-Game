@@ -107,9 +107,9 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
-        $this->wordRepository->deleteAllWordsByCategoryId($id);
-
         $this->authorize('destroy', Category::class);
+        
+        $this->wordRepository->deleteAllWordsByCategoryId($id);
 
         if ($this->repository->delete($id)) {
             return redirect()->route('category.index');

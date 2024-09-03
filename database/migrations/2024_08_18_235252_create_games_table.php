@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('status');
             $table->unsignedBigInteger('word_id');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('word_id')->references('id')->on('words');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('word_id')->references('id')->on('words')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
