@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('layouts.home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -16,5 +19,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/', function () {
+  return view('layouts.home');
+})->name('home');
+
+Route::get('/category', function () {
+  return view('layouts.category');
+})->name('category');
+
+Route::get('/word/category/{categoryId}', [WordController::class, 'indexByCategory'])->name('word.indexByCategory');
+
+Route::resources(['category' => CategoryController::class]);
+Route::resources(['word' => WordController::class]);
+Route::resources(['game' => GameController::class]);
+Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('game.letter');
+Route::get('/statistics', [GameController::class, 'statistics'])->name('statistics');
+Route::get('/report', [GameController::class, 'report'])->name('report');
+Route::get('/graph', [GameController::class, 'graph'])->name('graph');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 require __DIR__.'/auth.php';
