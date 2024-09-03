@@ -45,14 +45,20 @@
       @if ($game->status == 'GANHOU')
         <div class="flex flex-col items-center justify-center gap-5">
           <p class="alert alert-success text-center">Parabéns! Você ganhou! A palavra era: <strong>{{ $word }}</strong></p>
-          <a href="{{ route('game.create') }}" class="btn btn-primary">Novo Jogo</a>
+            <form action="{{ route('game.store') }}" method="post">
+              @csrf
+              <button type="submit" class="btn btn-primary">Iniciar Novo Jogo</button>
+            </form>
         </div>
       @endif
 
       @if ($game->status == 'PERDEU')
         <div class="flex flex-col items-center justify-center gap-5">
           <p class="alert alert-danger">Você perdeu! A palavra era: <strong>{{ $word }}</strong></p>
-          <a href="{{ route('game.create') }}" class="btn btn-primary text-white font-bold">Novo Jogo</a>
+            <form action="{{ route('game.store') }}" method="post">
+              @csrf
+              <button type="submit" class="btn btn-primary">Iniciar Novo Jogo</button>
+            </form>
         </div>
       @endif
     </div>

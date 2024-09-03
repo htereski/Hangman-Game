@@ -32,7 +32,10 @@
               <td>
                   @if ($game->status === "JOGANDO")
                     <a href="{{ route('game.show', $game->id) }}" class="btn btn-primary">Continuar</a>
+                  @else
+                    <a href="{{ route('game.show', $game->id) }}" class="btn btn-primary">Ver</a>
                   @endif
+
               </td>
             </tr>
             @endforeach
