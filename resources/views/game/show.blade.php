@@ -27,7 +27,7 @@
             @csrf
             <div class="form-group">
                 <label for="letter">Digite uma letra:</label>
-                <input type="text" name="letter" id="letter" maxlength="1" required class="form-control">
+                <input type="text" name="letter" id="letter" maxlength="1" required class="form-control text-primary" autofocus>
             </div>
             <button type="submit" class="btn btn-success">Enviar</button>
         </form>

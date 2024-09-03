@@ -58,7 +58,7 @@
 
     <dialog id="modal" class="modal">
       <div class="modal-box">
-        <h3 class="text-lg font-bold text-primary">Criar / Editar</h3>
+        <h3 class="text-lg font-bold text-primary"></h3>
         <form id="word-form" action="" method="POST">
           @csrf
           <div id="http-method-container"></div>
