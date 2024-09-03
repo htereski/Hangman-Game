@@ -31,6 +31,6 @@ export default {
       prefix: "",
       logs: true,
       themeRoot: ":root",
-      themes: ["dracula", "cyberpunk", "aqua", "retro", "synthwave"],
+      themes: ["dracula", "emerald"],
     },
 };

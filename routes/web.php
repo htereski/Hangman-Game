@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('layouts.home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -37,5 +37,7 @@ Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('
 Route::get('/statistics', [GameController::class, 'statistics'])->name('statistics');
 Route::get('/report', [GameController::class, 'report'])->name('report');
 Route::get('/graph', [GameController::class, 'graph'])->name('graph');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 require __DIR__.'/auth.php';

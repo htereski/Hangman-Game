@@ -10,6 +10,28 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
 
+              </div>
+              <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl  top-[100%] ring-offset-0">
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost text-center"
+                    aria-label="Escuro"
+                    value="default" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost text-center"
+                    aria-label="Claro"
+                    value="emerald" />
+                </li>
+              </ul>
+            </div>
+
+
                 <dialog id="settingsModal" class="modal text-primary">
                     <div class="modal-box flex flex-col items-center justify-center">
                         <div class="dropdown mb-72 flex flex-col items-center justify-center">
@@ -92,4 +114,6 @@
             @endauth
         </ul>
     </div>
+  </div>
+
 </x-guest-layout>
