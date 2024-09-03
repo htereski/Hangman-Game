@@ -89,8 +89,8 @@
 
     <ul class="menu rounded-box w-56 text-4xl gap-10 flex flex-row justify-center items-center text-primary">
       <li><a>Jogar</a></li>
-      <li><a>Estatísticas</a></li>
-      <li><a href="/category">Categorias</a></li>
+      <li><a href="{{ route('statistics') }}">Estatísticas</a></li>
+      <li><a href="{{ route('category.index') }}">Categorias</a></li>
     </ul>
   </div>
 </x-guest-layout>
