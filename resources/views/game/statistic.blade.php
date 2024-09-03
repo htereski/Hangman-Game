@@ -10,8 +10,8 @@
             </div>
           </div>
         <ul class="menu rounded-box w-56 text-4xl gap-10 flex flex-row justify-center items-center text-primary">
-            <li><a href="{{ route('report') }}">Documento</a></li>
-            <li><a href="{{ route('graph') }}">Gráfico</a></li>
+            <li><a href="{{ route('report') }}" target="_blank">Documento</a></li>
+            <li><a href="{{ route('graph') }}" target="_blank">Gráfico</a></li>
         </ul>
     </div>
 </x-app-layout>
