@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     protected $repository;
+    protected $wordRepository;
 
     public function __construct()
     {
@@ -47,11 +48,7 @@ class CategoryController extends Controller
             return redirect()->route('category.index');
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+        return view('message');
     }
 
     public function show(string $id)
@@ -64,11 +61,7 @@ class CategoryController extends Controller
             return view('category.show', compact(['category']));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+        return view('message');
     }
 
     public function edit(string $id)
@@ -81,48 +74,39 @@ class CategoryController extends Controller
             return view('category.edit', compact(['category']));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+        return view('message');
     }
 
     public function update(Request $request, string $id)
     {
-      $this->authorize('edit', Category::class);
+        $this->authorize('edit', Category::class);
 
-      $rules = [
-        'name' => ['required', 'string', 'max:255'],
-      ];
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+        ];
 
-      if ($request->hasFile('img')) {
-        $rules['img'] = ['required', 'file'];
-      }
-
-      $request->validate($rules);
-
-      if ($request->hasFile('img')) {
-        if ($this->repository->updateWithImg($request, $id)) {
-          return redirect()->route('category.index');
+        if ($request->hasFile('img')) {
+            $rules['img'] = ['required', 'file'];
         }
-      } else {
-        if ($this->repository->updateWithoutImg($request, $id)) {
-          return redirect()->route('category.index');
-        }
-      }
 
-      return view('message')
-        ->with('type', "danger")
-        ->with('titulo', "OPERAÇÃO INVÁLIDA")
-        ->with('message', "Não foi possível efetuar o procedimento!")
-        ->with('link', "category.index");
+        $request->validate($rules);
+
+        if ($request->hasFile('img')) {
+            if ($this->repository->updateWithImg($request, $id)) {
+                return redirect()->route('category.index');
+            }
+        } else {
+            if ($this->repository->updateWithoutImg($request, $id)) {
+                return redirect()->route('category.index');
+            }
+        }
+
+        return view('message');
     }
 
 
     public function destroy(string $id)
     {
-
         $this->wordRepository->deleteAllWordsByCategoryId($id);
 
         $this->authorize('destroy', Category::class);
@@ -131,10 +115,6 @@ class CategoryController extends Controller
             return redirect()->route('category.index');
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "category.index");
+        return view('message');
     }
 }

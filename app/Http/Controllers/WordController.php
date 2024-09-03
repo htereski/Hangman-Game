@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 class WordController extends Controller
 {
     protected $repository;
+    protected $categoryRepository;
 
     function __construct()
     {
@@ -21,11 +22,11 @@ class WordController extends Controller
 
     public function index()
     {
-      $this->authorize('index', Word::class);
+        $this->authorize('index', Word::class);
 
-      $words = $this->repository->selectAll();
+        $words = $this->repository->selectAll();
 
-      return view('word.index', compact('words'));
+        return view('word.index', compact('words'));
     }
 
     public function create()
@@ -52,11 +53,7 @@ class WordController extends Controller
             return redirect()->route('word.indexByCategory', $word->category_id);
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
+        return view('message');
     }
 
     public function show(string $id)
@@ -69,11 +66,7 @@ class WordController extends Controller
             return view('word.show', compact('word'));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
+        return view('message');
     }
 
     public function edit(string $id)
@@ -86,11 +79,7 @@ class WordController extends Controller
             return view('word.edit', compact('word'));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
+        return view('message');
     }
 
     public function update(Request $request, string $id)
@@ -109,51 +98,39 @@ class WordController extends Controller
             $word->name = $request->name;
             $word->category_id = $request->category_id;
             if ($this->repository->save($word)) {
-              return redirect()->route('word.indexByCategory', $word->category_id);
+                return redirect()->route('word.indexByCategory', $word->category_id);
             }
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "word.index");
+        return view('message');
     }
 
     public function destroy(string $id)
-  {
-      $this->authorize('destroy', Word::class);
+    {
+        $this->authorize('destroy', Word::class);
 
-      $word = $this->repository->findById($id);
+        $word = $this->repository->findById($id);
 
-      if(!$word) {
-        return view('message')
-          ->with('type', "danger")
-          ->with('titulo', "OPERAÇÃO INVÁLIDA")
-          ->with('message', "Palavra não encontrada!")
-          ->with('link', "word.index");
-      }
+        if (!$word) {
+            return view('message');
+        }
 
-      $category = $this->categoryRepository->findById($word->category_id);
+        $category = $this->categoryRepository->findById($word->category_id);
 
-      if($this->repository->delete($id)) {
-        return redirect()->route('word.indexByCategory', $category->id);
-      }
+        if ($this->repository->delete($id)) {
+            return redirect()->route('word.indexByCategory', $category->id);
+        }
 
-      return view('message')
-        ->with('type', "danger")
-        ->with('titulo', "OPERAÇÃO INVÁLIDA")
-        ->with('message', "Não foi possível efetuar o procedimento!")
-        ->with('link', "word.index");
-  }
+        return view('message');
+    }
 
-  public function indexByCategory($categoryId)
-  {
-    $this->authorize('index', Word::class);
+    public function indexByCategory($categoryId)
+    {
+        $this->authorize('index', Word::class);
 
-    $words = $this->repository->findWordsByCategoryId($categoryId);
-    $category = $this->categoryRepository->findById($categoryId);
+        $words = $this->repository->findWordsByCategoryId($categoryId);
+        $category = $this->categoryRepository->findById($categoryId);
 
-    return view('word.index', compact('words', 'category'));
-  }
+        return view('word.index', compact('words', 'category'));
+    }
 }

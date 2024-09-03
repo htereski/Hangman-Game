@@ -50,11 +50,7 @@ class GameController extends Controller
             return redirect()->route('game.show', $game_id);
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "game.index");
+        return view('message');
     }
 
     public function show(string $id)
@@ -65,20 +61,12 @@ class GameController extends Controller
 
         if (Auth::user()->id !== $game->user_id) {
             return view('message');
-            // ->with('type', "danger")
-            // ->with('titulo', "OPERAÇÃO INVÁLIDA")6
-            // ->with('message', "Você não possui permissão para realizar esta ação!")
-            // ->with('link', "game.show");
         }
         if (isset($game)) {
             return view('game.show', compact('game'));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "game.index");
+        return view('message');
     }
 
     public function edit(string $id)
@@ -91,11 +79,7 @@ class GameController extends Controller
             return view('game.edit', compact('game'));
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "game.index");
+        return view('message');
     }
 
     public function update(Request $request, string $id)
@@ -124,11 +108,7 @@ class GameController extends Controller
             }
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "game.index");
+        return view('message');
     }
 
     public function destroy(string $id)
@@ -139,11 +119,7 @@ class GameController extends Controller
             return redirect()->route('game.index');
         }
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', "Não foi possível efetuar o procedimento!")
-            ->with('link', "game.index");
+        return view('message');
     }
 
     public function insertLetter(Request $request, $id)
@@ -156,24 +132,14 @@ class GameController extends Controller
         $game = $this->repository->findById($id);
 
         if (Auth::user()->id !== $game->user_id) {
-            return view('message')
-                ->with('type', "danger")
-                ->with('titulo', "OPERAÇÃO INVÁLIDA")
-                ->with('message', "Você não possui permissão para realizar esta ação!")
-                ->with('link', "game.show");
+            return view('message');
         }
 
         $result = $this->service->insertLetter($game, $letter);
-
-        // if ($result['status'] === 'success') {
-        // }
+        
         return redirect()->route('game.show', $result['game']->id);
 
-        return view('message')
-            ->with('type', "danger")
-            ->with('titulo', "OPERAÇÃO INVÁLIDA")
-            ->with('message', $result['message'])
-            ->with('link', "game.show");
+        return view('message');
     }
 
     public function statistics()

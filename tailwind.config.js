@@ -31,6 +31,6 @@ export default {
       prefix: "",
       logs: true,
       themeRoot: ":root",
-      themes: ["dracula", "emerald"],
+      themes: ["winter", "dracula"],
     },
 };

@@ -26,14 +26,14 @@
                   <ul tabindex="0"
                       class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl  top-[100%] ring-offset-0">
                       <li>
-                          <input type="radio" name="theme-dropdown"
-                              class="theme-controller btn btn-sm btn-block btn-ghost text-center" aria-label="Escuro"
-                              data-set-theme="default" value="default" />
+                        <input type="radio" name="theme-dropdown"
+                          class="theme-controller btn btn-sm btn-block btn-ghost text-center" aria-label="Claro"
+                          data-set-theme="winter" value="winter" />
                       </li>
                       <li>
-                          <input type="radio" name="theme-dropdown"
-                              class="theme-controller btn btn-sm btn-block btn-ghost text-center" aria-label="Claro"
-                              data-set-theme="emerald" value="emerald" />
+                        <input type="radio" name="theme-dropdown"
+                          class="theme-controller btn btn-sm btn-block btn-ghost text-center" aria-label="Escuro"
+                          data-set-theme="dracula" value="dracula" />
                       </li>
                   </ul>
               </div>
