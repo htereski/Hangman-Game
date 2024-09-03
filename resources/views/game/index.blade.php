@@ -17,7 +17,7 @@
           <tr>
             <th>ID</th>
             <th>Status</th>
-            <th>Tentativas</th>
+            <th>Tentativas restantes</th>
             <th>Data de Criação</th>
             <th>Ações</th>
           </tr>
@@ -27,7 +27,7 @@
             <tr>
               <td>{{ $game->id }}</td>
               <td>{{ $game->status }}</td>
-              <td>{{ $game->attempts }}</td>
+              <td>{{ 7 - $game->attempts }}</td>
               <td>{{ $game->created_at }}</td>
               <td>
                   @if ($game->status === "JOGANDO")
