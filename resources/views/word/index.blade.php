@@ -81,7 +81,7 @@
 
           <div class="flex gap-4">
             <button type="button" onclick="document.getElementById('modal').close()" class="btn btn-secondary">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Salvar Palavra(s)</button>
+            <button type="submit" class="btn btn-primary">Salvar Palavra</button>
           </div>
         </form>
       </div>
