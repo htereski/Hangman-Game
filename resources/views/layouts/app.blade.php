@@ -38,3 +38,19 @@
         </div>
     </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentTheme = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+  
+      const themeControllers = document.querySelectorAll('.theme-controller');
+  
+      themeControllers.forEach(controller => {
+        controller.addEventListener('click', function () {
+          const selectedTheme = this.getAttribute('data-set-theme');
+          document.documentElement.setAttribute('data-theme', selectedTheme);
+          localStorage.setItem('theme', selectedTheme);
+        });
+      });
+    });
+</script>
