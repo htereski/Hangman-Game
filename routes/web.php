@@ -37,4 +37,6 @@ Route::post('game/{id}/letter', [GameController::class, 'insertLetter'])->name('
 Route::get('/report', [GameController::class, 'report'])->name('report');
 Route::get('/graph', [GameController::class, 'graph'])->name('graph');
 
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 require __DIR__.'/auth.php';
