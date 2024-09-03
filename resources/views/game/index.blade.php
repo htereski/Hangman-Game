@@ -28,7 +28,9 @@
                     <td>{{ $game->attempts }}</td>
                     <td>{{ $game->created_at }}</td>
                     <td>
-                        <a href="{{ route('game.show', $game->id) }}" class="btn btn-info">Continuar</a>
+                        @if ($game->status === "JOGANDO")
+                            <a href="{{ route('game.show', $game->id) }}" class="btn btn-info">Continuar</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

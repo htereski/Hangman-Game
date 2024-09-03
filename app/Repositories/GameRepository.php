@@ -33,9 +33,9 @@ class GameRepository extends Repository
             $game->attempts = 0;
             $game->status = 'JOGANDO';
             $game->save();
-            return true;
+            return $game->id;
         } catch (Exception $e) {
-            return false;
+            return null;
         }
     }
 }

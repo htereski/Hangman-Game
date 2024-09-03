@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-use function PHPUnit\Framework\isEmpty;
 
 class GameController extends Controller
 {
@@ -27,7 +26,9 @@ class GameController extends Controller
     {
         $this->authorize('index', Game::class);
 
-        $games = $this->repository->selectAll();
+        $user_id = Auth::user()->id;
+
+        $games = Game::where('user_id', $user_id)->get();
 
         return view('game.index', compact('games'));
     }
@@ -43,8 +44,10 @@ class GameController extends Controller
     {
         $this->authorize('create', Game::class);
 
-        if ($this->repository->newGame()) {
-            return redirect()->route('game.index');
+        $game_id = $this->repository->newGame();
+
+        if (isset($game_id)) {
+            return redirect()->route('game.show', $game_id);
         }
 
         return view('message')
@@ -63,7 +66,7 @@ class GameController extends Controller
         if (Auth::user()->id !== $game->user_id) {
             return view('message');
             // ->with('type', "danger")
-            // ->with('titulo', "OPERAÇÃO INVÁLIDA")
+            // ->with('titulo', "OPERAÇÃO INVÁLIDA")6
             // ->with('message', "Você não possui permissão para realizar esta ação!")
             // ->with('link', "game.show");
         }
