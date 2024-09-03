@@ -54,8 +54,9 @@
             </div>
           </a>
         @endcan
+        
         @cannot('index', App\Models\Word::class)
-          <div class="card image-full w-96 shadow-xl cursor-pointer">
+          <div class="card image-full w-96 shadow-xl">
             <figure class="object-contain w-96 h-96">
               <img src="{{ asset($category->url) }}" alt="{{ $category->name }}" class="object-scale-down h-48 w-96"/>
             </figure>
