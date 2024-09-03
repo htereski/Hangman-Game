@@ -38,7 +38,7 @@
         </div>
 
         <a href="/word/category/{{ $category->id }}">
-          <div class="card image-full w-96 shadow-xl transition-opacity duration-300 hover:opacity-100 opacity-50 cursor-pointer">
+          <div class="card image-full w-96 shadow-xl transition-opacity duration-300 hover:opacity-100 opacity-70 cursor-pointer">
             <figure class="object-contain w-96 h-96">
               <img src="{{ asset($category->url) }}" alt="{{ $category->name }}" class="object-scale-down h-48 w-96"/>
             </figure>
